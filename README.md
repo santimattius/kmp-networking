@@ -1,4 +1,4 @@
-# KMP Compose Gradle Skeleton
+# KMP Networking
 
 This is a Kotlin Multiplatform project targeting Android, iOS.
 

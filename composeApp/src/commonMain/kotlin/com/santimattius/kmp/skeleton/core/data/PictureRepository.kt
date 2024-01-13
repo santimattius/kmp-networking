@@ -1,8 +1,6 @@
 package com.santimattius.kmp.skeleton.core.data
 
-import io.ktor.client.HttpClient
-import io.ktor.client.call.body
-import io.ktor.client.request.get
+import com.santimattius.kmp.skeleton.core.network.PictureService
 import com.santimattius.kmp.skeleton.core.domain.Picture as DomainPicture
 
 private fun Picture.asDomain(): DomainPicture {
@@ -10,10 +8,9 @@ private fun Picture.asDomain(): DomainPicture {
 }
 
 class PictureRepository(
-    private val client: HttpClient,
+    private val service: PictureService,
 ) {
     suspend fun random() = runCatching {
-        val response = client.get("/random")
-        response.body<Picture>().asDomain()
+        service.random().asDomain()
     }
 }

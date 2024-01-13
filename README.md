@@ -2,6 +2,29 @@
 
 This is a Kotlin Multiplatform project targeting Android, iOS.
 
+
+```kotlin
+class ServiceCreator(baseUrl: String) {
+
+    private val client = HttpClient {
+        install(ContentNegotiation) {
+            json(Json { isLenient = true; ignoreUnknownKeys = true })
+        }
+    }
+    private val ktorfit = Ktorfit.Builder()
+        .baseUrl(baseUrl)
+        .httpClient(client)
+        .build()
+
+    fun createPictureService() = ktorfit.create<PictureService>()
+}
+
+interface PictureService {
+
+    @GET("random")
+    suspend fun random(): Picture
+}
+```
 * `/composeApp` is for code that will be shared across your Compose Multiplatform applications.
   It contains several subfolders:
     - `commonMain` is for code that’s common for all targets.

@@ -5,6 +5,8 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.kotlinSerialization)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.ktorfit)
 }
 
 kotlin {
@@ -57,6 +59,7 @@ kotlin {
                 implementation(libs.voyager.navigator)
                 implementation(libs.voyager.koin)
 
+                implementation(libs.ktorfit.lib)
                 implementation(libs.ktor.client.core)
                 implementation(libs.ktor.client.content.negotiation)
                 implementation(libs.ktor.client.logging)
@@ -116,6 +119,20 @@ android {
     }
     dependencies {
         debugImplementation(libs.compose.ui.tooling)
+    }
+}
+
+dependencies {
+    with(libs.ktorfit.ksp) {
+        add("kspCommonMainMetadata", this)
+        add("kspAndroid", this)
+        add("kspAndroidTest", this)
+        add("kspIosX64", this)
+        add("kspIosX64Test", this)
+        add("kspIosArm64", this)
+        add("kspIosArm64Test", this)
+        add("kspIosSimulatorArm64", this)
+        add("kspIosSimulatorArm64Test", this)
     }
 }
 
